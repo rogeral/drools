@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import static org.mvel2.asm.Opcodes.V1_5;
 import static org.mvel2.asm.Opcodes.V1_6;
 import static org.mvel2.asm.Opcodes.V1_7;
+import static org.mvel2.asm.Opcodes.V1_8;
 
 /**
  * 
@@ -50,7 +51,7 @@ public class JavaDialectConfiguration
     public static final int             JANINO          = 1;
     public static final int             NATIVE          = 2;
 
-    public static final String[]        LANGUAGE_LEVELS = new String[]{"1.5", "1.6", "1.7"};
+    public static final String[]        LANGUAGE_LEVELS = new String[]{"1.5", "1.6", "1.7", "1.8"};
 
     private String                      languageLevel;
 
@@ -165,8 +166,12 @@ public class JavaDialectConfiguration
                 return "1.6";
             case V1_7:
                 return "1.7";
+            case V1_8:
+                // ecj still doesn't work with version 1.8 it generates the following error
+                // "Pb(591) Syntax error, static imports are only available if source level is 1.5 or greater"
+                return "1.7";
             default:
-                return "1.6";
+                return "1.7";
         }
     }
 }
