@@ -36,6 +36,12 @@ public class ConstraintNodeImpl implements ConstraintNode {
     }
 
     public ConstraintNodeImpl( final String className,
+                               final String fieldName ) {
+        setClassName( className );
+        setFieldName( fieldName );
+    }
+
+    public ConstraintNodeImpl( final String className,
                                final String fieldName,
                                final String operator,
                                final Value value ) {

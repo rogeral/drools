@@ -96,8 +96,15 @@ public class GuidedDecisionTreeModelDRLVisitor {
                 if ( context instanceof ConstraintNode ) {
                     drl.append( ", " );
                 }
-                drl.append( cn.getFieldName() ).append( " " ).append( cn.getOperator() ).append( " " ).append( generateValueDRL( cn.getValue() ) );
-
+                if ( cn.getFieldName() != null ) {
+                    drl.append( cn.getFieldName() );
+                    if ( cn.getOperator() != null ) {
+                        drl.append( " " ).append( cn.getOperator() );
+                        if ( cn.getValue() != null ) {
+                            drl.append( " " ).append( generateValueDRL( cn.getValue() ) );
+                        }
+                    }
+                }
             }
             context = node;
         }

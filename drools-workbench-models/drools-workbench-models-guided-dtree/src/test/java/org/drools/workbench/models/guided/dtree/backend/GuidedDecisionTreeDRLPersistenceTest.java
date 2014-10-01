@@ -86,6 +86,28 @@ public class GuidedDecisionTreeDRLPersistenceTest {
     }
 
     @Test
+    public void testSingleRule_SingleConstraintNoOperatorNoValue() throws Exception {
+        final String expected = "rule \"test_0\"" +
+                "when\n" +
+                "  Person( name )\n" +
+                "then\n" +
+                "end";
+
+        final GuidedDecisionTree model = new GuidedDecisionTree();
+        model.setTreeName( "test" );
+
+        final TypeNode type = new TypeNodeImpl( "Person" );
+        final ConstraintNode c1 = new ConstraintNodeImpl( "Person",
+                                                          "name" );
+        model.setRoot( type );
+        type.getChildren().add( c1 );
+
+        final String drl = GuidedDecisionTreeDRLPersistence.getInstance().marshal( model );
+        assertEqualsIgnoreWhitespace( expected,
+                                      drl );
+    }
+
+    @Test
     public void testSingleRule_MultipleConstraints() throws Exception {
         final String expected = "rule \"test_0\"" +
                 "when\n" +
